@@ -1,0 +1,87 @@
+html,
+body {
+  height: 100%;
+}
+
+.register-space
+{
+    border-radius: 10px;
+    border: #1288dd 2px solid;
+    margin-top: 100px;
+    padding: 50px;
+}
+
+.login-space
+{
+    margin: 0;
+    margin-right: 25px;
+    margin-left: 25px;
+    padding: 50px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-radius: 10px;
+    border: #1288dd 2px solid;
+}
+
+@media all and (min-width:0px) and (max-width: 768px) {
+    .login-space
+    {
+        margin-right: auto;
+        margin-left: auto;
+    }
+  }
+
+.user-details
+{
+    font-weight: bold;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+
+.container
+{
+    padding-top: 10px;
+    min-height: 400px;
+}
+
+.dashboard-tab
+{
+    display: inline-flex;
+    vertical-align: middle;
+    margin: 0 auto;
+    padding: 25px;
+    font-size: x-large;
+}
+
+.material-align
+{
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+
+.dashboard-tab .material-icons
+{
+    font-size: 36px;
+}
+
+.dashboard-card
+{
+    padding: 30px;
+}
+
+.error404
+{
+    margin-top: 10%;
+}
+
+
+.footer
+{
+    background-image: linear-gradient(45deg,#1288dd,#C113E3);
+    padding: 20px 0px 20px 0px;
+}
+

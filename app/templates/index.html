@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Traffic E-Challan System : Home{% endblock %}
+
+{% block body %}
+<div class="container-fluid  flex-grow-1 flex-shrink-0 ">
+<div class="row flex-sm-row-reverse">
+    <div class="col-md-3 col-sm-12 bg-white login-space">
+      {% if messages %}
+          {% for message in messages %}
+          <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+          {% endfor %}
+      {% endif %}
+      <div class="text-center h4">Login</div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              {% if form.errors.password %}
+              <div class="alert alert-danger text-center" role="alert">
+                {{ form.errors.password }}
+              </div>
+              {% endif %}
+              <label for="username">Username</label>
+              {{ form.username }}
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              {{ form.password }}
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <br>
+        Not Having Account? <a href="register">Register</a>
+    </div>
+    <div class="col-md-9 col-sm-10">
+      
+    </div>
+</div>
+</div>
+{% endblock %}

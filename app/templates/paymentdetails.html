@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Traffic E-Challan System : Payment Details{% endblock %}
+
+{% block body %}
+<div class="container flex-grow-1 flex-shrink-0 bg-white">
+<div class="text-center h4">Payment Details</div>
+
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Transaction ID : {{transaction.order_id}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Registration Number : {{transaction.reg_no}}</li>
+    <li class="list-group-item flex-fill">Challan ID : {{transaction.challan}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Date and Time : {{transaction.date}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Amount : Rs. {{transaction.txn_amt}}</li>
+    <li class="list-group-item flex-fill">Status : {% if transaction.resp_code == '01' %}<span class="badge badge-success">Success</span>{% else %}<span class="badge badge-danger">Failed</span>{% endif %}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Payment Mode : {% if transaction.txn_mode == 'NB' %}Net Banking{% elif transaction.txn_mode == 'UPI' %}UPI{% elif transaction.txn_mode == 'DC' %}Debit Card{% elif transaction.txn_mode == 'CC' %}Credit Card{% else %}Paytm Wallet{% endif %}</li>
+    <li class="list-group-item flex-fill">Bank Name : {{transaction.bank_name}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Transaction Reference ID : {{transaction.txn_id}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Bank Transaction ID : {{transaction.bank_txn_id}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Message : {{transaction.resp_msg}}</li>
+</ul>
+<br>
+<div class="text-right">
+  <a class="btn btn-primary" href="/" role="button"><span class="material-align"><span class="material-icons">arrow_back</span>Back to home</span></a>
+</div>
+<br>
+</div>
+
+{% endblock %}

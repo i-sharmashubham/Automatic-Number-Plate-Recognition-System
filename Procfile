@@ -1,0 +1,1 @@
+web: gunicorn anpr.wsgi --log-file -

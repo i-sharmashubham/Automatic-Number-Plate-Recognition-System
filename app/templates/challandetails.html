@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Traffic E-Challan System : Challan Details{% endblock %}
+
+{% block body %}
+<div class="container flex-grow-1 flex-shrink-0 bg-white">
+<div class="text-center h4">Challan Details</div>
+
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Challan ID : {{challan.id}}</li>
+    <li class="list-group-item flex-fill">Registration Number : {{challan.reg_no}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Date and Time : {{challan.date}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Place : {{challan.place}}</li>
+</ul>
+{% if challan.plate %}
+<ul class="list-group list-group-horizontal-sm">
+  <li class="list-group-item flex-fill text-center"><img src="{{challan.plate.url}}" class="img-fluid img-thumbnail" onerror="this.style.display='none'"></li>
+</ul>
+{% endif %}
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill text-center">Challan Amount Breakup</li>
+</ul>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Violation Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Insurance Expired</td>
+        <td>{% if challan.insurance == 0 %}No{% else %}Yes{% endif %}</td>
+        <td>Rs. {{challan.insurance}}</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Pollution Certificate Expired</td>
+        <td>{% if challan.puc == 0 %}No{% else %}Yes{% endif %}</td>
+        <td>Rs. {{challan.puc}}</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Registration Expired</td>
+        <td>{% if challan.registration == 0 %}No{% else %}Yes{% endif %}</td>
+        <td>Rs. {{challan.registration}}</td>
+      </tr>
+      <tr>
+        <th scope="row" colspan="3">Total</th>
+        <td>Rs. {{challan.insurance|add:challan.puc|add:challan.registration}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Payment Status : {% if challan.is_paid %}<span class="badge badge-success">Paid</span> {% if challan.txn_account == user.email %}<a href="paymentdetails?txn_id={{challan.txn_id}}">Click here to view transaction details</a>{% else %}Transaction details not avilable for transaction made from different account.{% endif %}{% elif challan.is_closed %}<span class="badge badge-warning">Closed</span>{% else %}<span class="badge badge-danger">Unpaid</span>{% endif %}</li>
+    {% if challan.is_paid %}<li class="list-group-item flex-fill">Transaction ID : {{challan.txn_id}}</li>{% endif %}
+</ul>
+{% if challan.txn_id %}
+<br>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill text-center">Last Transaction Details</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Transaction ID : {{challan.txn_id}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+  <li class="list-group-item flex-fill">Transaction Account : {{challan.txn_account}}</li>
+</ul>
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item flex-fill">Transaction Date : {{challan.txn_date}}</li>
+    <li class="list-group-item flex-fill">Transaction Status : {% if challan.is_paid %}<span class="badge badge-success">Success</span>{% else %}<span class="badge badge-danger">Failed</span>{% endif %}</li>
+</ul>
+{% endif %}
+<br>
+{% if not challan.is_paid and not challan.is_closed %}
+<div class="text-center">
+    <a href="makepayment?challan_id={{challan.id}}&no={{challan.reg_no}}" role="button" class="btn btn-primary btn-lg">Make Payment of Rs. {{challan.insurance|add:challan.puc|add:challan.registration}}</a>
+</div>
+<br>
+{% endif %}
+<div class="text-right">
+  <a class="btn btn-primary" href="/" role="button"><span class="material-align"><span class="material-icons">arrow_back</span>Back to home</span></a>
+</div>
+<br>
+
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Traffic E-Challan System : Dashboard{% endblock %}
+
+{% block body %}
+<div class="container flex-grow-1 flex-shrink-0 bg-white">
+<div class="row">
+    <a class="col-md-6 col-sm-12  text-center text-decoration-none dashboard-card" href="viewchallan">
+        <div class="card bg-primary text-white text-center p-3">
+            <div class="dashboard-tab"><span class="material-icons">search</span> Find Challan</div>
+        </div>
+    </a>
+    <a class="col-md-6 col-sm-12  text-center text-decoration-none dashboard-card" href="paymenthistory">
+        <div class="card bg-primary text-white text-center p-3">
+            <div class="dashboard-tab"><span class="material-icons">history</span> Payment History</div>
+        </div>
+    </a>
+    <a class="col-md-6 col-sm-12  text-center text-decoration-none dashboard-card" href="subscribe">
+        <div class="card bg-primary text-white text-center p-3">
+            <div class="dashboard-tab"><span class="material-icons">notifications_active</span> Challan Alert Subscription</div>
+        </div>
+    </a>
+</div>
+</div>
+{% endblock %}
